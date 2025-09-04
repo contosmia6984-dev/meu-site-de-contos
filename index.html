@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mia Contos - Explorando Paixões Eróticas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background: linear-gradient(135deg, #2c1810, #1a0d0b);
+            background: linear-gradient(135deg, #2c1810, #1a0b0b);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #f4f4f4;
         }
@@ -19,10 +19,8 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.3);
             animation: pulse 3s infinite;
             pointer-events: none;
@@ -82,10 +80,8 @@
         /* Modal Styles */
         .modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.8);
             display: flex;
             align-items: center;
@@ -133,6 +129,63 @@
             background: rgba(255,255,255,0.2);
             color: #f4f4f4;
         }
+        /* Preview Story Styles */
+        #previewStory {
+            max-width: 900px;
+            margin: 0 auto 3rem auto;
+            background: rgba(255,255,255,0.12);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        #previewStory img {
+            max-width: 300px;
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        #previewStory .preview-content {
+            flex: 1 1 500px;
+            color: #f4f4f4;
+        }
+        #previewStory .preview-content h3 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+        #previewStory .preview-content p.genre {
+            font-weight: 600;
+            color: #d90429;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        #previewStory .preview-content p.text {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        #previewStory .preview-content p.author {
+            font-weight: 600;
+            font-style: italic;
+            text-align: right;
+            color: #e0aaff;
+        }
+        @media (max-width: 768px) {
+            #previewStory {
+                flex-direction: column;
+                align-items: center;
+            }
+            #previewStory .preview-content {
+                text-align: center;
+            }
+            #previewStory .preview-content p.author {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen overflow-hidden">
@@ -141,7 +194,7 @@
         <div class="modal-content">
             <h2>Confirmação de Idade</h2>
             <p>Este site contém conteúdo erótico e é destinado exclusivamente a maiores de 18 anos. Você confirma que tem mais de 18 anos?</p>
-            <input type="email" id="confirmEmail" placeholder="Digite seu e-mail para confirmação (opcional)" class="genre-select">
+            <input type="email" id="confirmEmail" placeholder="Digite seu e-mail para confirmação (opcional)" class="genre-select" />
             <button id="confirmBtn" class="btn-confirm">Sim, Tenho mais de 18 anos</button>
             <button id="denyBtn" class="btn-deny">Não, sou menor de 18 anos</button>
         </div>
@@ -156,6 +209,17 @@
     </header>
 
     <main id="mainContent" class="container mx-auto px-4 py-16 hidden">
+        <!-- Preview de um conto postado -->
+        <section id="previewStory" aria-label="Prévia de conto erótico" class="mb-16" style="display:none;">
+            <img id="previewImage" src="" alt="Imagem relacionada ao conto erótico" />
+            <div class="preview-content">
+                <h3 id="previewTitle"></h3>
+                <p class="genre" id="previewGenre"></p>
+                <p class="text" id="previewText"></p>
+                <p class="author" id="previewAuthor"></p>
+            </div>
+        </section>
+
         <section class="mb-16">
             <h2 class="text-4xl font-bold mb-8 text-center">Envio de Contos</h2>
             <div class="card p-8 max-w-3xl mx-auto">
@@ -166,11 +230,11 @@
                 <form id="emailForm" class="space-y-6">
                     <div>
                         <label for="title" class="block text-lg font-medium">Título do Conto</label>
-                        <input type="text" id="title" class="w-full p-3 rounded-lg genre-select" placeholder="Digite o título provocante aqui" required>
+                        <input type="text" id="title" class="w-full p-3 rounded-lg genre-select" placeholder="Digite o título provocante aqui" required />
                     </div>
                     <div>
                         <label for="author" class="block text-lg font-medium">Nome Fictício</label>
-                        <input type="text" id="author" class="w-full p-3 rounded-lg genre-select" placeholder="Escolha um nome fictício sedutor" required>
+                        <input type="text" id="author" class="w-full p-3 rounded-lg genre-select" placeholder="Escolha um nome fictício sedutor" required />
                     </div>
                     <div>
                         <label for="genre" class="block text-lg font-medium">Gênero</label>
@@ -212,92 +276,99 @@
     <footer class="text-center py-8 bg-black bg-opacity-50">
         <p>© 2023 Mia Contos. Entre na paixão das palavras proibidas.</p>
         <div class="mt-4">
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/802abbf2-4e3e-4f0d-bf07-684245079a5a.png" alt="Abstract silhouette of intertwined figures in a passionate embrace with soft glow and suggestive curves" class="mx-auto">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/802abbf2-4e3e-4f0d-bf07-684245079a5a.png" alt="Abstract silhouette of intertwined figures in a passionate embrace with soft glow and suggestive curves" class="mx-auto" />
         </div>
     </footer>
 
     <script>
-        // Modal de Confirmação de Idade
-        const modal = document.getElementById('ageModal');
-        const confirmBtn = document.getElementById('confirmBtn');
-        const denyBtn = document.getElementById('denyBtn');
-        const mainContent = document.getElementById('mainContent');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Modal de Confirmação de Idade
+            const modal = document.getElementById('ageModal');
+            const confirmBtn = document.getElementById('confirmBtn');
+            const denyBtn = document.getElementById('denyBtn');
+            const mainContent = document.getElementById('mainContent');
+            const body = document.body;
 
-        confirmBtn.addEventListener('click', () => {
-            const email = document.getElementById('confirmEmail').value.trim();
-            if (email) {
-                alert('E-mail de confirmação enviado! (Simulação - sem backend)');
-            }
-            modal.style.display = 'none';
-            mainContent.classList.remove('hidden');
-            document.body.classList.remove('overflow-hidden');
-        });
+            // Inicialmente, modal visível e conteúdo oculto
+            modal.style.display = 'flex';
+            mainContent.classList.add('hidden');
+            body.classList.add('overflow-hidden');
 
-        denyBtn.addEventListener('click', () => {
-            alert('Você deve ter mais de 18 anos para acessar este site. Redirecionando...');
-            window.location.href = 'about:blank';
-        });
-
-        // Dados de contos iniciais (fictícios para exemplo)
-        let stories = JSON.parse(localStorage.getItem('stories')) || [
-            { title: 'A Noite Ardente', author: 'Luna Sombra', genre: 'Heterossexual', summary: 'Uma noite de paixão proibida entre dois amantes...' },
-            { title: 'Despertar Sensual', author: 'Alex Rio', genre: 'Gay', summary: 'A descoberta de uma conexão elétrica com alguém inesperado...' },
-            { title: 'Laços de Dominação', author: 'Mistress Vex', genre: 'BDSM', summary: 'Explorando os limites do prazer e controle em um encontro secreto...' },
-            { title: 'Sabores Diversos', author: 'Echo Wilde', genre: 'Variados', summary: 'Uma narrativa que mergulha em desejos variados e inacabáveis...' },
-            { title: 'Encounters in the Dark', author: 'Noel Bliss', genre: 'Heterossexual', summary: 'História de encontros noturnos cheios de intensidade...' }
-        ];
-
-        function renderStories(filterGenre = '') {
-            const list = document.getElementById('storyList');
-            list.innerHTML = '';
-            const filtered = filterGenre ? stories.filter(s => s.genre === filterGenre) : stories;
-            filtered.forEach(story => {
-                const div = document.createElement('div');
-                div.className = 'story-item';
-                div.innerHTML = `<h3 class="text-2xl font-bold mb-3">${story.title}</h3><p class="mb-3">Por: <span class="italic">${story.author}</span> | Gênero: <span class="font-semibold">${story.genre}</span></p><p class="leading-relaxed">${story.summary}</p>`;
-                list.appendChild(div);
+            confirmBtn.addEventListener('click', () => {
+                const email = document.getElementById('confirmEmail').value.trim();
+                if (email) {
+                    alert('E-mail de confirmação enviado! (Simulação - sem backend)');
+                }
+                modal.style.display = 'none';
+                mainContent.classList.remove('hidden');
+                body.classList.remove('overflow-hidden');
+                showPreviewStory();
             });
-            if (filtered.length === 0) {
-                list.innerHTML = '<p class="text-center text-xl">Nenhum conto encontrado para este gênero. Seja o primeiro a contribuir!</p>';
+
+            denyBtn.addEventListener('click', () => {
+                alert('Você deve ter mais de 18 anos para acessar este site. Redirecionando...');
+                window.location.href = 'about:blank';
+            });
+
+            // Dados de contos iniciais (fictícios para exemplo)
+            let stories = JSON.parse(localStorage.getItem('stories')) || [
+                {
+                    title: 'A Noite Ardente',
+                    author: 'Luna Sombra',
+                    genre: 'Heterossexual',
+                    summary: 'Uma noite de paixão proibida entre dois amantes que se entregam ao desejo sem reservas, sob o véu da escuridão.',
+                    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    title: 'Despertar Sensual',
+                    author: 'Alex Rio',
+                    genre: 'Gay',
+                    summary: 'A descoberta de uma conexão elétrica com alguém inesperado, onde cada toque revela um mundo novo de sensações.',
+                    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    title: 'Laços de Dominação',
+                    author: 'Mistress Vex',
+                    genre: 'BDSM',
+                    summary: 'Explorando os limites do prazer e controle em um encontro secreto que desafia todas as regras.',
+                    image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    title: 'Sabores Diversos',
+                    author: 'Echo Wilde',
+                    genre: 'Variados',
+                    summary: 'Uma narrativa que mergulha em desejos variados e inacabáveis, onde cada capítulo é uma nova aventura.',
+                    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    title: 'Encounters in the Dark',
+                    author: 'Noel Bliss',
+                    genre: 'Heterossexual',
+                    summary: 'História de encontros noturnos cheios de intensidade e mistério, onde o proibido é irresistível.',
+                    image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80'
+                }
+            ];
+
+            function renderStories(filterGenre = '') {
+                const list = document.getElementById('storyList');
+                list.innerHTML = '';
+                const filtered = filterGenre ? stories.filter(s => s.genre === filterGenre) : stories;
+                filtered.forEach(story => {
+                    const div = document.createElement('div');
+                    div.className = 'story-item';
+                    div.innerHTML = `<h3 class="text-2xl font-bold mb-3">${story.title}</h3><p class="mb-3">Por: <span class="italic">${story.author}</span> | Gênero: <span class="font-semibold">${story.genre}</span></p><p class="leading-relaxed">${story.summary}</p>`;
+                    list.appendChild(div);
+                });
+                if (filtered.length === 0) {
+                    list.innerHTML = '<p class="text-center text-xl">Nenhum conto encontrado para este gênero. Seja o primeiro a contribuir!</p>';
+                }
             }
-        }
 
-        document.getElementById('filterGenre').addEventListener('change', (e) => {
-            renderStories(e.target.value);
-        });
+            document.getElementById('filterGenre').addEventListener('change', (e) => {
+                renderStories(e.target.value);
+            });
 
-        // Botão para enviar e-mail com história
-        document.getElementById('sendEmailBtn').addEventListener('click', () => {
-            const title = document.getElementById('title').value.trim();
-            const author = document.getElementById('author').value.trim();
-            const genre = document.getElementById('genre').value;
-            const storyContent = document.getElementById('story').value.trim();
-
-            if (!title || !author || !genre || !storyContent) {
-                alert('Por favor, preencha todos os campos para enviar sua história provocante.');
-                return;
-            }
-
-            const subject = `Novo Conto Erótico: ${title}`;
-            const body = `Título: ${title}%0D%0ANome Fictício: ${author}%0D%0AGênero: ${genre}%0D%0A%0D%0AConteúdo:%0D%0A${storyContent}`;
-
-            const mailtoLink = `mailto:contosmia6984@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailtoLink;
-
-            // Após "enviar", limpar formulário
-            document.getElementById('emailForm').reset();
-
-            // Opcional: Armazenar localmente para simulação (após envio)
-            const senderData = { title, author, genre, summary: storyContent.substring(0, 200) + '...', timestamp: Date.now() };
-            stories.push(senderData);
-            localStorage.setItem('stories', JSON.stringify(stories));
-            renderStories();
-        });
-
-        // Renderizar contos na carga
-        renderStories();
-    </script>
-</body>
-</html>
-</content>
-</create_file>
+            // Botão para enviar e-mail com história
+            document.getElementById('sendEmailBtn').addEventListener('click', () => {
+                const title = document.getElementById('title').value.trim();
+                const
