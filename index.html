@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mia_Contos - Contos Eróticos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Arial', sans-serif; }
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 0, 150, 0.9); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+    .modal.hidden { display: none; }
+    .bg-erotic { background: linear-gradient(to bottom, #ff0080, #4b0082); }
+    .text-erotic { color: #ff69b4; }
+    .btn-erotic { background: #ff1493; color: white; padding: 10px 20px; border-radius: 5px; transition: background 0.3s; }
+    .btn-erotic:hover { background: #ff007f; }
+    .input-erotic { border: 2px solid #ff69b4; background: #2a004d; color: white; padding: 10px; border-radius: 5px; }
+    .input-erotic:focus { outline: none; border-color: #ff1493; }
+    .card-erotic { background: rgba(255, 20, 147, 0.1); border: 1px solid #ff0080; border-radius: 10px; padding: 20px; margin: 10px 0; }
+  </style>
+</head>
+<body class="bg-erotic min-h-screen text-white">
+  <!-- Modal de Confirmação de Idade -->
+  <div id="ageModal" class="modal">
+    <div class="bg-black p-8 rounded-lg shadow-lg max-w-md w-full">
+      <h2 class="text-2xl font-bold text-erotic mb-4">Bem-vindo ao Mia_Contos</h2>
+      <p class="mb-4">Este site contém contos eróticos para adultos. Confirme que tem mais de 18 anos e registre seu e-mail para prosseguir.</p>
+      <form id="ageForm">
+        <input type="checkbox" id="ageCheck" class="mr-2" required>
+        <label for="ageCheck" class="mb-2 inline-block">Tenho mais de 18 anos</label><br>
+        <input type="email" id="email" placeholder="Seu e-mail" class="input-erotic mb-4 w-full" required>
+        <button type="submit" class="btn-erotic w-full">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <header class="py-4 bg-black shadow-md">
+    <div class="container mx-auto text-center">
+      <h1 class="text-4xl font-bold text-erotic">Mia_Contos</h1>
+      <p class="text-lg mt-2">Explorando paixões eróticas através de histórias provocantes</p>
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/669b91c2-223e-4806-8ef0-1864fc18395e.png" alt="Logo style with silky red curtains partially open revealing a shadowed erotic silhouette, using vibrant purple and pink tones for a seductive and mysterious atmosphere" class="mx-auto my-4 rounded-lg">
+    </div>
+  </header>
+
+  <main class="container mx-auto p-4">
+    <!-- Busca -->
+    <section class="mb-8">
+      <h2 class="text-2xl text-erotic mb-4">Buscar Contos</h2>
+      <div class="flex flex-col md:flex-row gap-4">
+        <input type="text" id="searchName" placeholder="Buscar por nome do conto" class="input-erotic flex-1">
+        <input type="date" id="searchDate" class="input-erotic">
+        <button id="searchBtn" class="btn-erotic">Buscar</button>
+      </div>
+    </section>
+
+    <!-- Lista de Contos -->
+    <section id="storiesList" class="mb-8">
+      <h2 class="text-2xl text-erotic mb-4">Contos Disponíveis</h2>
+      <div id="stories"></div>
+    </section>
+
+    <!-- Formulário para Submeter Conto -->
+    <section>
+      <h2 class="text-2xl text-erotic mb-4">Submeter Novo Conto</h2>
+      <form id="storyForm" enctype="multipart/form-data">
+        <input type="email" id="submitEmail" placeholder="Seu e-mail" class="input-erotic w-full mb-4" required>
+        <input type="text" id="alias" placeholder="Nome fictício (usuário)" class="input-erotic w-full mb-4" required>
+        <textarea id="storyText" placeholder="Texto do conto (seja provocante e detalhado)" class="input-erotic w-full mb-4 h-32" required></textarea>
+        <input type="file" id="storyImage" accept="image/*" class="mb-4">
+        <small class="block mb-4 text-gray-300">Opcional: Adicione uma foto erótica (ela ficará antes do texto)</small>
+        <button type="submit" class="btn-erotic w-full">Submeter Conto</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="bg-black py-4 mt-8">
+    <div class="container mx-auto text-center">
+      <p class="text-erotic">Assinado por Mia, a guardiã dos desejos mais profundos.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Modal de idade
+    const ageModal = document.getElementById('ageModal');
+    const ageForm = document.getElementById('ageForm');
+    const emailInput = document.getElementById('email');
+
+    ageForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (document.getElementById('ageCheck').checked && emailInput.value) {
+        localStorage.setItem('userEmail', emailInput.value);
+        ageModal.classList.add('hidden');
+      } else {
+        alert('Por favor, confirme sua idade e forneça um e-mail válido.');
+      }
+    });
+
+    // Carregar contos do localStorage ou inicializar vazio
+    let stories = JSON.parse(localStorage.getItem('stories')) || [];
+
+    // Função para renderizar contos
+    function renderStories(filteredStories = stories) {
+      const container = document.getElementById('stories');
+      container.innerHTML = '';
+      filteredStories.forEach(story => {
+        const card = document.createElement('div');
+        card.className = 'card-erotic';
+        let html = `
+          <h3 class="text-xl text-erotic mb-2">${story.alias} - ${story.title}</h3>
+          <p class="text-sm text-gray-300">${new Date(story.date).toLocaleDateString()}</p>
+        `;
+        if (story.image) {
+          html += `<img src="${story.image}" alt="Imagem erótica uploadada exibindo cenas sensuais e provocantes com foco em formas curvilíneas e atmosfera íntima" class="w-full max-h-64 object-cover rounded mb-4">`;
+        }
+        html += `<p class="mt-2">${story.text}</p>`;
+        card.innerHTML = html;
+        container.appendChild(card);
+      });
+    }
+
+    // Formulário de busca
+    const searchBtn = document.getElementById('searchBtn');
+    const searchName = document.getElementById('searchName');
+    const searchDate = document.getElementById('searchDate');
+
+    searchBtn.addEventListener('click', function() {
+      const nameQuery = searchName.value.toLowerCase();
+      const dateQuery = searchDate.value;
+      const filtered = stories.filter(story => {
+        const matchesName = story.title.toLowerCase().includes(nameQuery);
+        const matchesDate = !dateQuery || new Date(story.date).toISOString().split('T')[0] === dateQuery;
+        return matchesName && matchesDate;
+      });
+      renderStories(filtered);
+    });
+
+    // Formulário de submissão
+    const storyForm = document.getElementById('storyForm');
+
+    storyForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const submitEmail = document.getElementById('submitEmail').value;
+      const alias = document.getElementById('alias').value;
+      const text = document.getElementById('storyText').value;
+      const imageFile = document.getElementById('storyImage').files[0];
+      let imageSrc = null;
+
+      if (imageFile) {
+        // Simulação de upload - em produção, usar uma API real
+        imageSrc = URL.createObjectURL(imageFile);
+      }
+
+      const newStory = {
+        title: alias + "'s Story", // Usar alias como título base
+        alias,
+        email: submitEmail,
+        text,
+        image: imageSrc,
+        date: new Date().toISOString()
+      };
+
+      stories.push(newStory);
+      localStorage.setItem('stories', JSON.stringify(stories));
+      renderStories();
+      storyForm.reset();
+      alert('Conto submetido com sucesso!');
+    });
+
+    // Inicializar
+    renderStories();
+
+    // Verificar se já fez confirmação
+    if (localStorage.getItem('userEmail')) {
+      ageModal.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
+</content>
+</create_file>
